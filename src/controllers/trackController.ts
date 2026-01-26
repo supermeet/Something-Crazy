@@ -78,7 +78,7 @@ export const createTrack = async (req: AuthRequest, res: Response): Promise<void
     }
 
     const track: Track = {
-      id: `track-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
+      id: `track-${Date.now()}-${Math.random().toString(36).substring(2, 11)}`,
       name,
       location,
       parTime,

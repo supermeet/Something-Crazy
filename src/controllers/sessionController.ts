@@ -1,7 +1,7 @@
 import { Response } from 'express';
 import { AuthRequest, Session } from '../types';
 import { dataStore } from '../models/dataStore';
-import { calculateXP } from '../services/gamification';
+import { calculateXP, calculateLevel } from '../services/gamification';
 
 /**
  * Create a new session
@@ -43,7 +43,7 @@ export const createSession = async (req: AuthRequest, res: Response): Promise<vo
 
     // Create session
     const session: Session = {
-      id: `session-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
+      id: `session-${Date.now()}-${Math.random().toString(36).substring(2, 11)}`,
       userId: req.user!.uid,
       trackId,
       lapTime,
@@ -69,8 +69,12 @@ export const createSession = async (req: AuthRequest, res: Response): Promise<vo
       });
     }
 
+    const newTotalXP = user.totalXP + xpCalculation.totalXP;
+    const newLevel = calculateLevel(newTotalXP);
+
     const updatedUser = dataStore.updateUser(req.user!.uid, {
-      totalXP: user.totalXP + xpCalculation.totalXP,
+      totalXP: newTotalXP,
+      level: newLevel,
     });
 
     res.status(201).json({
