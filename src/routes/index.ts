@@ -9,7 +9,7 @@ router.use('/sessions', sessionRoutes);
 router.use('/tracks', trackRoutes);
 
 // Health check endpoint
-router.get('/health', (req, res) => {
+router.get('/health', (_req, res) => {
   res.status(200).json({
     status: 'OK',
     timestamp: new Date().toISOString(),

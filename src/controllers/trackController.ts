@@ -6,7 +6,7 @@ import { dataStore } from '../models/dataStore';
  * Get all tracks
  * GET /api/tracks
  */
-export const getAllTracks = async (req: Request, res: Response): Promise<void> => {
+export const getAllTracks = async (_req: Request, res: Response): Promise<void> => {
   try {
     const tracks = dataStore.getAllTracks();
 

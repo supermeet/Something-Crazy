@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { verifyFirebaseToken, optionalAuth } from '../middleware/auth';
+import { verifyFirebaseToken } from '../middleware/auth';
 import {
   getAllTracks,
   getTrack,
